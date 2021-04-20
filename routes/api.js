@@ -1530,6 +1530,7 @@ router.get('/hurufterbalik', async (req, res, next) => {
         .then(data => {
         var result = data;
              res.json({
+             	author: 'YogiPw',
                  result
              })
          })
