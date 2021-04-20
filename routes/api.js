@@ -408,6 +408,20 @@ router.get('/short/tiny', async (req, res, next) => {
      })
 })
 
+router.get('/rip', async (req, res) => {
+	var apikeyInput = req.query.apikey,
+	url = req.query.url
+	
+	if(!apikeyInput) return res.json(loghandler.notparam)
+	if (apikeyInput != 'yogipwkey')  return res.json(loghandler.invalidKey)
+	if(!url) return res.json({ status : false, creator : `${creator}`, message : "masukan parameter url"})
+	
+      hasil = (`link webnya=https://alpin-api-2021.herokuapp.com/api/rip?url=${url}&apikey=alpin1`)
+     data = await fetch(hasil).then(v => v.buffer())
+         await fs.writeFileSync('heker.png', data)
+        res.sendFile(__path+'/heker.png')
+})
+
 router.get('/base', async (req, res, next) => {
 	var type = req.query.type,
 		encode = req.query.encode,
@@ -1530,7 +1544,6 @@ router.get('/hurufterbalik', async (req, res, next) => {
         .then(data => {
         var result = data;
              res.json({
-             	author: 'YogiPw',
                  result
              })
          })
