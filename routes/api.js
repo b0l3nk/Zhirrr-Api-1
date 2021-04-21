@@ -1506,6 +1506,80 @@ router.get('/nsfw/yuri', async (req, res, next) => {
 })
 })
 ///NSFW END
+//ENC
+router.get('/binary', async (req, res, next) => {
+	var apikeyInput = req.query.apikey,
+        text = req.query.decode;
+
+	if(!apikeyInput) return res.json(loghandler.notparam)
+	if(apikeyInput != 'yogipwkey') return res.json(loghandler.invalidKey)
+        if (!text) return res.json(loghandler.nottext)
+
+ try {
+       var json = await (await fetch(`https://some-random-api.ml/binary?decode=${text}`)).json()
+        var result = json.text
+             res.json({
+             	status : true,
+                creator : `${creator}`,
+                result : result
+             })
+} catch (e) {
+    res.json(loghandler.error)
+   }
+})
+
+router.get('/tobase64', async (req, res, next) => {
+	var apikeyInput = req.query.apikey,
+        img = req.query.img;
+
+	if(!apikeyInput) return res.json(loghandler.notparam)
+	if(apikeyInput != 'yogipwkey') return res.json(loghandler.invalidKey)
+        if (!img) return res.json(loghandler.notimg)
+
+ try {
+           var result = await imageToBase64(img)
+                res.json({
+                   	status : true,
+                       creator : `${creator}`,
+                       result : result
+             })
+} catch (e) {
+    res.json(loghandler.error)
+   }
+})
+
+router.get('/tomedia', async (req, res, next) => {
+	var apikeyInput = req.query.apikey,
+        base64 = req.query.base64;
+
+	if(!apikeyInput) return res.json(loghandler.notparam)
+	if(apikeyInput != 'yogipwkey') return res.json(loghandler.invalidKey)
+    if (!base64) return res.json(loghandler.notbase64)
+    if (base64.startsWith('data')) return res.json({ message : `Gunakan teks base64 tanpa data:image/jpeg!` })
+
+ try {
+           var result = Buffer.from(base64, 'base64')
+                res.sendFile(result)
+} catch (e) {
+    res.json(loghandler.error)
+   }
+})
+router.get('/md5', async (req, res, next) => {
+     var apikeyInput = req.query.apikey,
+            text = req.query.text;
+
+  if(!apikeyInput) return res.json(loghandler.notparam)
+  if(apikeyInput != 'yogipwkey') return res.json(loghandler.invalidKey)
+  if (!text) return res.json(loghandler.nottext)
+
+     var result = await createHash('md5').update(text).digest('hex')
+       res.json({
+       	status : true,
+           creator : `${creator}`,
+           result : result
+       })
+})
+//ENC END
 router.get('/muslim/wirid', async (req, res, next) => {
         var apikeyInput = req.query.apikey
             
