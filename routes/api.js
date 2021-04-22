@@ -8,7 +8,7 @@ var zahirr = db.get("zahirr");
 	console.log('')
 }
 
-var creatorList = ['@yogi','@yogi','@yogi','@yogi', '@yogi','@yogi','@zahirrgantengg'];
+var creatorList = ['@yogipw'];
 var creator = creatorList[Math.floor(Math.random() * creatorList.length)];
 
 
@@ -3202,13 +3202,13 @@ router.get('/yutub/audio', async (req, res, next) => {
 })
 router.get('/sfile/search', async (req, res, next) => {
         var apikeyInput = req.query.apikey,
-            query = req.query.url
+            cari = req.query.url
             
 	if(!apikeyInput) return res.json(loghandler.notparam)
 	if(apikeyInput != 'yogipwkey') return res.json(loghandler.invalidKey)
-    if (!query) return res.json({ status : false, creator : `${creator}`, message : "yg mau dicari apa tod?"})
+    if (!cari) return res.json({ status : false, creator : `${creator}`, message : "yg mau dicari apa tod?"})
 
-       fetch(encodeURI(`https://fzn-gaz.herokuapp.com/api/sfile?search=${query}`))
+       fetch(encodeURI(`https://fzn-gaz.herokuapp.com/api/sfile?search=${cari}`))
         .then(response => response.json())
         .then(data => {
         var result = data;
