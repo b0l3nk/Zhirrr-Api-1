@@ -3200,6 +3200,27 @@ router.get('/yutub/audio', async (req, res, next) => {
          	res.json(loghandler.error)
 })
 })
+router.get('/sfile/search', async (req, res, next) => {
+        var apikeyInput = req.query.apikey,
+            query = req.query.url
+            
+	if(!apikeyInput) return res.json(loghandler.notparam)
+	if(apikeyInput != 'yogipwkey') return res.json(loghandler.invalidKey)
+    if (!query) return res.json({ status : false, creator : `${creator}`, message : "yg mau dicari apa tod?"})
+
+       fetch(encodeURI(`https://fzn-gaz.herokuapp.com/api/sfile?search=${search}`))
+        .then(response => response.json())
+        .then(data => {
+        var result = data;
+             res.json({
+             	author: 'YogiPw',
+                 result
+             })
+         })
+         .catch(e => {
+         	res.json(loghandler.error)
+})
+})
 
 
 router.get('/ig/stalk', async (req, res, next) => {
