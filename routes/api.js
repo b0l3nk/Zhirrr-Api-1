@@ -3202,7 +3202,7 @@ router.get('/yutub/audio', async (req, res, next) => {
 })
 router.get('/sfile/search', async (req, res, next) => {
         var apikeyInput = req.query.apikey,
-            cari = req.query.url
+            cari = req.query.cari
             
 	if(!apikeyInput) return res.json(loghandler.notparam)
 	if(apikeyInput != 'yogipwkey') return res.json(loghandler.invalidKey)
