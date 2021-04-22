@@ -3213,7 +3213,8 @@ router.get('/sfile/search', async (req, res, next) => {
         .then(data => {
         var result = data;
              res.json({
-             	author: 'YogiPw'
+             	author: 'YogiPw',
+                 result
              })
          })
          .catch(e => {
