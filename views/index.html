@@ -14,46 +14,96 @@
 <body>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="">
-  <title>YogiPw APIs</title>
-  <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
-  <link href="css/ruang-admin.min.css" rel="stylesheet">
-  <script>
-window['CboxReady'] = function (Cbox) {
-	Cbox('button', '6-852538-vNvLf8');
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Free Rest API">
+    <meta name="author" content="AkiRa">
+    <title>Akira API</title>
+    <link href="/static/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="/static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="/static/css/ruang-admin.min.css" rel="stylesheet">
+    <link href="/static/css/default.css" rel="stylesheet">
+    <link href="/static/css/style.css" rel="stylesheet">
+    <audio autoplay="autoplay" hidden="hidden" src="https://j.top4top.io/m_19348x7ni0.mp3"></audio>
+    <script>
+      alert(`Harap Dibaca!!
+      
+Jika Sdh Register atau Login, Jangan Lupa Refresh Halaman, Karna Website Kadang Slow Ress`)
+    </script>
+            <style>
+            .center {
+              margin-left: auto;
+              margin-right: auto;
+              width: 50%;
+            }
+.marquee {
+ height: 40px;	
+ overflow: hidden;
+ position: relative;
 }
-</script>
-<script src="https://static.cbox.ws/embed/1.js" async></script>
+.marquee h3 {
+ font-size: 1em;
+ color: rgb(0, 0, 0);
+ position: absolute;
+ width: 100%;
+ height: 100%;
+ margin: 0;
+ line-height: 50px;
+ text-align: center;
+ /* Starting position */
+ -moz-transform:translateX(100%);
+ -webkit-transform:translateX(100%);	
+ transform:translateX(100%);
+ /* Apply animation to this element */	
+ -moz-animation: marquee 15s linear infinite;
+ -webkit-animation: marquee 15s linear infinite;
+ animation: marquee 15s linear infinite;
+}
+/* Move it (define the animation) */
+@-moz-keyframes marquee {
+ 0%   { -moz-transform: translateX(100%); }
+ 100% { -moz-transform: translateX(-100%); }
+}
+@-webkit-keyframes marquee {
+ 0%   { -webkit-transform: translateX(100%); }
+ 100% { -webkit-transform: translateX(-100%); }
+}
+@keyframes marquee {
+ 0%   { 
+ -moz-transform: translateX(100%); 
+ -webkit-transform: translateX(100%);
+ transform: translateX(100%); 		
+ }
+ 100% { 
+ -moz-transform: translateX(-100%);
+ -webkit-transform: translateX(-100%); 
+ transform: translateX(-100%); 
+ }
+}
+            </style>  
 </head>
 
-<body id="page-top" onload="getvisitor();">
+<body id="page-top" class="dark-mode" onload="getvisitor();">
   <div id="wrapper">
-    <!-- Sidebar -->
-    <ul class="navbar-nav sidebar sidebar-light accordion" id="accordionSidebar">
-      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
-        <div class="sidebar-brand-icon">
-        	<img src="img/logo/logo2.png">
-        </div>
-        <div class="sidebar-brand-text mx-3">YogiPw API</div>
-      </a>
-      <hr class="sidebar-divider my-0">
-      <li class="nav-item active">
-        <a class="nav-link" href="#">
-          <i class="fas fa-fw fa-code"></i>
-          <span>Beranda</span></a>
-      </li>
-      <hr class="sidebar-divider">
-      <div class="sidebar-heading">
-        API Features
-      </div>
-      <li class="nav-item">
+        <!-- Sidebar -->
+        <ul class="navbar-nav sidebar sidebar-light accordion" id="accordionSidebar">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+                <i class="fa fa-fire fa-2x"></i>
+                <div class="sidebar-brand-text mx-3">Akira API</div>
+            </a>
+            <hr class="sidebar-divider my-0">
+            <li class="nav-item active">
+                <a class="nav-link" href="/">
+                    <i class="fas fa-fw fa-thermometer-three-quarters"></i>
+                    <span>Statistic</span></a>
+            </li>
+            <hr class="sidebar-divider">
+            <div class="sidebar-heading">
+                Features
+            </div>
+            <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBootstrap"
           aria-expanded="true" aria-controls="collapseBootstrap">
           <i class="fas fa-fw fa-arrow-down"></i>
