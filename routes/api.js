@@ -3208,7 +3208,7 @@ router.get('/sfile/search', async (req, res, next) => {
 	if(apikeyInput != 'yogipwkey') return res.json(loghandler.invalidKey)
     if (!query) return res.json({ status : false, creator : `${creator}`, message : "yg mau dicari apa tod?"})
 
-       fetch(encodeURI(`https://fzn-gaz.herokuapp.com/api/sfile?search=${search}`))
+       fetch(encodeURI(`https://fzn-gaz.herokuapp.com/api/sfile?search=${query}`))
         .then(response => response.json())
         .then(data => {
         var result = data;
