@@ -3211,10 +3211,10 @@ router.get('/sfile/search', async (req, res, next) => {
        fetch(encodeURI(`https://fzn-gaz.herokuapp.com/api/sfile?search=${cari}`))
         .then(response => response.json())
         .then(data => {
-        var result = data;
+        var cuk = data;
              res.json({
              	author: 'YogiPw',
-                 result
+                 cuk
              })
          })
          .catch(e => {
