@@ -774,8 +774,8 @@ router.get('/8bit', async (req, res) => {
 	
       hasil = (`https://fzn-gaz.herokuapp.com/api/burikgas?text=${text1}&text2=${text2}`)
      data = await fetch(hasil).then(v => v.buffer())
-         await fs.writeFileSync('cuk.png', data)
-        res.sendFile(__path+'/cuk.png')
+         await fs.writeFileSync('burikgas.jpeg', data)
+        res.sendFile(__path+'/burikgas.jpeg')
 })
 
 router.get('/kisahnabi', async (req, res, next) => {
