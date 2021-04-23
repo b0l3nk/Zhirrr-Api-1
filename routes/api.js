@@ -763,6 +763,20 @@ router.get('/textmaker/senja', async (req, res, next) => {
             res.json(loghandler.error)
         }
 })
+router.get('/8bit', async (req, res) => {
+	var apikeyInput = req.query.apikey,
+	text1 = req.query.text1
+	text2 = req.query.text2
+	if(!apikeyInput) return res.json(loghandler.notparam)
+	if (apikeyInput != 'yogipwkey')  return res.json(loghandler.invalidKey)
+	if(!text1) return res.json({ status : false, creator : `${creator}`, message : "masukan parameter text1"})
+	if(!text2) return res.json({ status : false, creator : `${creator}`, message : "masukan parameter text2"})
+	
+      hasil = (`https://fzn-gaz.herokuapp.com/api/burikgas?text=${text1}&text2=${text2}`)
+     data = await fetch(hasil).then(v => v.buffer())
+         await fs.writeFileSync('cuk.png', data)
+        res.sendFile(__path+'/cuk.png')
+})
 
 router.get('/kisahnabi', async (req, res, next) => {
 	var nabi = req.query.nabi,
