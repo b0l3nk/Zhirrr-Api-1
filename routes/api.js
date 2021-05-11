@@ -325,6 +325,79 @@ router.get('/remove', (req, res, next) => {
     }
 })
 //Asupan
+router.get('/asupan/cecan', async (req, res, next) => {
+
+        var apikeyInput = req.query.apikey
+
+            
+
+	if(!apikeyInput) return res.json(loghandler.notparam)	if (apikeyInput != 'CheemsApi')  return res.json(loghandler.invalidKey)
+
+       fetch(encodeURI(`https://raw.githubusercontent.com/binjaicity/warga62/master/cecan.json`))
+
+        .then(response => response.json())
+
+        .then(data => {
+
+        var result = data;
+
+        var result = data[Math.floor(Math.random() * data.length)];
+
+             res.json({
+
+             	author: 'Cheems',
+
+                 result
+
+             })
+
+         })
+
+         .catch(e => {
+
+         	res.json(loghandler.error)
+
+})
+
+})
+
+router.get('/asupan/hijaber', async (req, res, next) => {
+
+        var apikeyInput = req.query.apikey
+
+            
+
+	if(!apikeyInput) return res.json(loghandler.notparam)
+
+	if (apikeyInput != 'CheemsApi')  return res.json(loghandler.invalidKey)
+
+       fetch(encodeURI(`https://raw.githubusercontent.com/binjaicity/warga62/master/hijaber.json`))
+
+        .then(response => response.json())
+
+        .then(data => {
+
+        var result = data;
+
+        var result = data[Math.floor(Math.random() * data.length)];
+
+             res.json({
+
+             	author: 'Cheems',
+
+                 result
+
+             })
+
+         })
+
+         .catch(e => {
+
+         	res.json(loghandler.error)
+
+})
+
+})
 router.get('/asupan', async (req, res, next) => {
         var apikeyInput = req.query.apikey
             
