@@ -27,7 +27,7 @@ var { color, bgcolor } = require(__path + '/lib/color.js');
 var { fetchJson } = require(__path + '/lib/fetcher.js')
 var options = require(__path + '/lib/options.js');
 var {
-	Vokal, jooxdl,
+	Vokal,
 	
 	
 	Base,
@@ -181,7 +181,7 @@ router.get('/find', async (req, res, next) => {
         res.json(loghandler.error)
     }
 })
-router.get('/music/joox', async (req, res, next) => {
+/*outer.get('/music/joox', async (req, res, next) => {
 
 	var apikeyInput = req.query.apikey,            query = req.query.query
 
@@ -215,7 +215,7 @@ router.get('/music/joox', async (req, res, next) => {
 
 	})
 
-})
+})*/
 router.get('/cekapikey', async (req, res, next) => {
 	var apikeyInput = req.query.apikey
 	if(!apikeyInput) return res.json(loghandler.notparam)
