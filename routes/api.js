@@ -34,6 +34,69 @@ var {
 } = require('./../lib');
 var cookie = "HSID=A7EDzLn3kae2B1Njb;SSID=AheuwUjMojTWvA5GN;APISID=cgfXh13rQbb4zbLP/AlvlPJ2xBJBsykmS_;SAPISID=m82rJG4AC9nxQ5uG/A1FotfA_gi9pvo91C;__Secure-3PAPISID=m82rJG4AC9nxQ5uG/A1FotfA_gi9pvo91C;VISITOR_INFO1_LIVE=RgZLnZtCoPU;LOGIN_INFO=AFmmF2swRQIhAOXIXsKVou2azuz-kTsCKpbM9szRExAMUD-OwHYiuB6eAiAyPm4Ag3O9rbma7umBK-AG1zoGqyJinh4ia03csp5Nkw:QUQ3MjNmeXJ0UHFRS3dzaTNGRmlWR2FfMDRxa2NRYTFiN3lfTEdOVTc4QUlwbUI4S2dlVngxSG10N3ZqcHZwTHBKano5SkN2dDlPSkhRMUtReE42TkhYeUVWS3kyUE1jY2I1QzA1MDZBaktwd1llWU9lOWE4NWhoZV92aDkxeE9vMTNlcG1uMU9rYjhOaDZWdno2ZzN3TXl5TVNhSjNBRnJaMExrQXpoa2xzRVUteFNWZDI5S0Fn;PREF=app=desktop&f4=4000000&al=id;SID=2wezCMTUkWN3YS1VmS_DXaEU84J0pZIQdemM8Zry-uzWm8y1njBpLTOpxSfN-EaYCRSiDg.;YSC=HCowA1fmvzo;__Secure-3PSID=2wezCMTUkWN3YS1VmS_DXaEU84J0pZIQdemM8Zry-uzWm8y1dajgWzlBh9TgKapGOwuXfA.;SIDCC=AJi4QfFK0ri9fSfMjMQ4tOJNp6vOb9emETXB_nf2S05mvr2jBlmeEvlSsQSzPMuJl_V0wcbL1r8;__Secure-3PSIDCC=AJi4QfGeWHx-c4uTpU1rXCciO1p0s2fJWU07KrkZhWyD1Tqi8LyR-kHuBwHY9mViVYu1fRh2PA";
 
+async function Joox(query) {
+  return new Promise((resolve, reject) => {
+    const time = Math.floor(new Date() / 1000)
+    axios.get('http://api.joox.com/web-fcgi-bin//web_search?lang=id&country=id&type=0&search_input=' + query + '&pn=1&sin=0&ein=29&_=' + time)
+      .then(({
+        data
+      }) => {
+        let result = []
+        let hasil = []
+        let promoses = []
+        let ids = []
+        data.itemlist.forEach(result => {
+          ids.push(result.songid)
+        });
+        for (let i = 0; i < data.itemlist.length; i++) {
+          const scrap = 'http://api.joox.com/web-fcgi-bin/web_get_songinfo?songid=' + ids[i]
+          promoses.push(
+            axios.get(scrap, {
+              headers: {
+                Cookie: 'wmid=142420656; user_type=1; country=id; session_key=2a5d97d05dc8fe238150184eaf3519ad;'
+              }
+            })
+            .then(({
+              data
+            }) => {
+              const res = JSON.parse(data.replace('MusicInfoCallback(', '').replace('\n)', ''))
+              hasil.push({
+                lagu: res.msong,
+                album: res.malbum,
+                penyanyi: res.msinger,
+                publish: res.public_time,
+                img: res.imgSrc,
+                mp3: res.mp3Url
+              })
+
+              axios.get('http://api.joox.com/web-fcgi-bin/web_lyric?musicid=' + ids[i] + '&lang=id&country=id&_=' + time)
+                .then(({
+                  data
+                }) => {
+                  const lirik = JSON.parse(data.replace('MusicJsonCallback(', '').replace('\n)', '')).lyric
+                  const buff = new Buffer.from(lirik, 'base64')
+                  const ash = buff.toString('utf-8')
+                  result.push({
+                    result: ash
+                  })
+                  Promise.all(promoses).then(() => resolve({
+                    status: true,
+                    code: 200,
+                    creator: 'X-MrH4D5',
+                    result: hasil[0],
+                    lirik: result[0]
+                  }))
+                })
+                .catch(reject)
+            })
+            .catch(reject)
+          )
+        }
+      })
+      .catch(reject)
+  })
+}
+
 loghandler = {
     notparam: {
         status: false,
@@ -287,7 +350,37 @@ router.get('/remove', (req, res, next) => {
         res.json(loghandler.error)
     }
 })
+router.get('/music/joox', async(req, res, next) => {
 
+          var apikeyInput = req.query.apikey
+
+          query = req.query.query
+
+            
+
+	if(!apikeyInput) return res.json(loghandler.notparam)	if(apikeyInput != 'SpaceApi') return res.json(loghandler.invalidKey)
+
+	if (!query) return res.json({ status : false, creator : `${creator}`, message : "masukan parameter query"})
+
+{
+
+  Joox(query)
+
+  .then((result) => {
+
+  res.json(result)
+
+    res.json(result)
+
+  });
+
+  } else {
+
+    res.json(loghandler.error)
+
+  }
+
+});
 router.get('/tiktod', async (req, res, next) => {
     var apikeyInput = req.query.apikey,
         url = req.query.url
