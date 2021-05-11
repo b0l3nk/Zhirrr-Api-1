@@ -27,7 +27,9 @@ var { color, bgcolor } = require(__path + '/lib/color.js');
 var { fetchJson } = require(__path + '/lib/fetcher.js')
 var options = require(__path + '/lib/options.js');
 var {
-	Vokal,
+	Vokal, jooxdl,
+	
+	
 	Base,
 	Searchnabi,
     Gempa
@@ -179,7 +181,41 @@ router.get('/find', async (req, res, next) => {
         res.json(loghandler.error)
     }
 })
+router.get('/music/joox', async (req, res, next) => {
 
+	var apikeyInput = req.query.apikey,            query = req.query.query
+
+            
+
+	if(!apikeyInput) return res.json(loghandler.notparam)
+
+	if(apikeyInput != 'CheemsApi') return res.json(loghandler.invalidKey)
+
+    if (!query) return res.json({ status : false, creator : `${creator}`, message : "masukan parameter query"})
+
+	jooxdl(query)
+
+		 .then(url => {
+
+		 res.json({
+
+		      status: true,
+
+		      creator: `${creator}`,
+
+		      result: url
+
+	 })
+
+	 .catch(e => {
+
+			console.log('Error :', color(e, 'red'))
+
+			res.json(loghandler.error)
+
+	})
+
+})
 router.get('/cekapikey', async (req, res, next) => {
 	var apikeyInput = req.query.apikey
 	if(!apikeyInput) return res.json(loghandler.notparam)
